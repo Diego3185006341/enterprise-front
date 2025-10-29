@@ -1,0 +1,55 @@
+/* src/components/Login.css */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.login-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #f7f9fc 0%, #ffffff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+}
+
+.login-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #fff;
+  padding: 8px;
+  box-shadow: 0 1px 4px rgba(16,24,40,0.06);
+}
+
+.btn-login {
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.toggle-pass {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+@media (max-width: 576px) {
+  .login-card { margin: 0 1rem; }
+  .login-logo { width: 52px; height: 52px; }
+}
+
