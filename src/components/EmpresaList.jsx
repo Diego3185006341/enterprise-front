@@ -17,7 +17,7 @@ export default function EmpresaList() {
       return;
     }
 
-    axios.get(`http://localhost:8080/api/empresas/all`, {
+    axios.get(`${API_URL}/api/empresas/all`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
