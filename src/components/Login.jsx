@@ -52,7 +52,6 @@ export default function Login() {
       setLoading(false);
     }
   };
-
   return (
     <div className="login-page d-flex align-items-center justify-content-center">
       <div className="login-card card shadow-sm">
