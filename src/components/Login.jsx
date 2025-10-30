@@ -4,55 +4,54 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 export default function Login() {
-  const [correo, setCorreo] = useState('');
-  const [password, setPassword] = useState('');
+  const [form, setForm] = useState({ correo: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  function validate() {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const validate = () => {
+    const { correo, password } = form;
     if (!correo.trim()) return 'El correo es requerido';
-    // validación simple de email
-    const re = /\S+@\S+\.\S+/;
-    if (!re.test(correo)) return 'Ingresa un correo válido';
+    if (!/\S+@\S+\.\S+/.test(correo)) return 'Ingresa un correo válido';
     if (!password) return 'La contraseña es requerida';
     if (password.length < 6) return 'La contraseña debe tener al menos 6 caracteres';
     return null;
-  }
-async function handleSubmit(e) {
-  e.preventDefault();
-  setError(null);
-  const v = validate();
-  if (v) {
-    setError(v);
-    return;
-  }
+  };
 
-  setLoading(true);
-  try {
-    // Ajusta la ruta de login según tu backend
-    const res = await api.post('https://enterprise-backend-production.up.railway.app/api/auth/login', { correo, password });
-    const token = res.data?.token || res.data?.accessToken || res.data;
-    if (!token) throw new Error('No se recibió token');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    const validationError = validate();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
 
-    localStorage.setItem('token', token); // ← ✅ Aquí guardas el token
-    setAuthToken(token); // ← si usas esto para configurar Axios globalmente
+    setLoading(true);
+    try {
+      const res = await api.post('/api/auth/login', form);
+      const token = res.data?.token || res.data?.accessToken || res.data;
+      if (!token) throw new Error('No se recibió token');
 
-    // redirige a home o empresas
-    navigate('/inicio');
-  } catch (err) {
-    const msg =
-      err.response?.data?.message ||
-      err.response?.data?.error ||
-      err.message ||
-      'Error al iniciar sesión';
-    setError(msg);
-  } finally {
-    setLoading(false);
-  }
-}
-
+      localStorage.setItem('token', token);
+      setAuthToken(token);
+      navigate('/inicio');
+    } catch (err) {
+      const msg =
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        err.message ||
+        'Error al iniciar sesión';
+      setError(msg);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="login-page d-flex align-items-center justify-content-center">
@@ -71,10 +70,11 @@ async function handleSubmit(e) {
               <label className="form-label">Correo</label>
               <input
                 type="email"
+                name="correo"
                 className="form-control"
                 placeholder="tu@correo.com"
-                value={correo}
-                onChange={(e) => setCorreo(e.target.value)}
+                value={form.correo}
+                onChange={handleChange}
                 disabled={loading}
                 autoComplete="username"
               />
@@ -85,10 +85,11 @@ async function handleSubmit(e) {
               <div className="input-group">
                 <input
                   type={showPassword ? 'text' : 'password'}
+                  name="password"
                   className="form-control"
                   placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={form.password}
+                  onChange={handleChange}
                   disabled={loading}
                   autoComplete="current-password"
                 />
