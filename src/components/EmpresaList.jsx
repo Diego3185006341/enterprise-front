@@ -35,7 +35,7 @@ export default function EmpresaList() {
     if (!window.confirm('¿Estás seguro de que deseas eliminar esta empresa?')) return;
 
     try {
-      await axios.delete(`${API_URL}/api/empresas/${id}`, {
+      await axios.delete(`https://enterprise-backend-production.up.railway.app/api/empresas/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
