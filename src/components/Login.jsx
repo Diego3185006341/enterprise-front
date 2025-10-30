@@ -34,7 +34,7 @@ export default function Login() {
 
     setLoading(true);
     try {
-      const res = await api.post('/api/auth/login', form);
+      const res = await api.post('https://enterprise-backend-production.up.railway.app/api/auth/login', form);
       const token = res.data?.token || res.data?.accessToken || res.data;
       if (!token) throw new Error('No se recibió token');
 

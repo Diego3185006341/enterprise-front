@@ -46,7 +46,7 @@ export default function EmpresaForm() {
         });
         alert('Empresa actualizada correctamente');
       } else {
-        await axios.post(`${API_URL}/api/empresas`, empresa, {
+        await axios.post(`https://enterprise-backend-production.up.railway.app/api/empresas`, empresa, {
           headers: { Authorization: `Bearer ${token}` }
         });
         alert('Empresa creada correctamente');

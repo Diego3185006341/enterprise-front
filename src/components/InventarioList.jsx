@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function InventarioList() {
-  const API_URL = process.env.REACT_APP_API_URL;
+
 
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState(null);
@@ -64,7 +64,7 @@ export default function InventarioList() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`${API_URL}/api/inventario/email-pdf?destinatario=${correoDestino}`, null, {
+      await axios.post(`http://localhost:8080/api/inventario/email-pdf?destinatario=${correoDestino}`, null, {
         headers: {
           Authorization: `Bearer ${token}`
         }
