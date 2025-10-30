@@ -17,7 +17,7 @@ export default function ProductoList() {
       return;
     }
 
-    axios.get(`${API_URL}/api/productos`, {
+    axios.get(`https://enterprise-backend-production.up.railway.app/api/productos`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

@@ -32,7 +32,7 @@ async function handleSubmit(e) {
   setLoading(true);
   try {
     // Ajusta la ruta de login según tu backend
-    const res = await api.post('/api/auth/login', { correo, password });
+    const res = await api.post('https://enterprise-backend-production.up.railway.app/api/auth/login', { correo, password });
     const token = res.data?.token || res.data?.accessToken || res.data;
     if (!token) throw new Error('No se recibió token');
 

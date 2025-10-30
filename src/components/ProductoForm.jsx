@@ -32,7 +32,7 @@ export default function ProductoForm() {
     };
 
     try {
-      await axios.post('http://localhost:8080/api/productos', payload, {
+      await axios.post(`https://enterprise-backend-production.up.railway.app/api/productos`, payload, {
         headers: {
           Authorization: `Bearer ${token}`
         }

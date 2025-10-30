@@ -8,22 +8,35 @@ import ProductoList from './components/ProductoList';
 import InventarioList from './components/InventarioList'; 
 import EmpresaForm from './components/EmpresaForm';
 import ProductoForm from './components/ProductoForm';
+import ProtectedRoute from './components/ProtectedRoute';
+
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/inicio" element={<Inicio />} />
-      <Route path="/empresas" element={<EmpresaList />} />
-      <Route path="/productos" element={<ProductoList />} />
-      <Route path="/inventario" element={<InventarioList />} />
-      <Route path="/empresas/editar/:id" element={<EmpresaForm />} />
-      <Route path="/empresas/crear" element={<EmpresaForm />} />
-      <Route path="/productos/crear" element={<ProductoForm />} />
 
-
-
-
+      <Route path="/inicio" element={
+        <ProtectedRoute><Inicio /></ProtectedRoute>
+      } />
+      <Route path="/empresas" element={
+        <ProtectedRoute><EmpresaList /></ProtectedRoute>
+      } />
+      <Route path="/productos" element={
+        <ProtectedRoute><ProductoList /></ProtectedRoute>
+      } />
+      <Route path="/inventario" element={
+        <ProtectedRoute><InventarioList /></ProtectedRoute>
+      } />
+      <Route path="/empresas/editar/:id" element={
+        <ProtectedRoute><EmpresaForm /></ProtectedRoute>
+      } />
+      <Route path="/empresas/crear" element={
+        <ProtectedRoute><EmpresaForm /></ProtectedRoute>
+      } />
+      <Route path="/productos/crear" element={
+        <ProtectedRoute><ProductoForm /></ProtectedRoute>
+      } />
     </Routes>
   );
 }

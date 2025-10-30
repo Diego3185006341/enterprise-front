@@ -17,7 +17,7 @@ export default function EmpresaForm() {
     if (!id) return; // Si no hay ID, es creación
 
     const token = localStorage.getItem('token');
-    axios.get(`http://localhost:8080/api/empresas/${id}`, {
+    axios.get(`https://enterprise-backend-production.up.railway.app/api/empresas/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -41,7 +41,7 @@ export default function EmpresaForm() {
 
     try {
       if (id) {
-        await axios.put(`${API_URL}/api/empresas/${id}`, empresa, {
+        await axios.put(`https://enterprise-backend-production.up.railway.app/api/empresas/${id}`, empresa, {
           headers: { Authorization: `Bearer ${token}` }
         });
         alert('Empresa actualizada correctamente');

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function InventarioList() {
-  const API_URL = "http://localhost:8080";
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ export default function InventarioList() {
       return;
     }
 
-    axios.get(`${API_URL}/api/productos`, {
+    axios.get(`https://enterprise-backend-production.up.railway.app/api/productos`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -36,7 +36,7 @@ export default function InventarioList() {
   const handleDescargarPDF = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${API_URL}/api/inventario/pdf`, {
+      const response = await axios.get(`https://enterprise-backend-production.up.railway.app/api/inventario/pdf`, {
         headers: {
           Authorization: `Bearer ${token}`
         },

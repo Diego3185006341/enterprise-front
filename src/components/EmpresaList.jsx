@@ -16,8 +16,7 @@ export default function EmpresaList() {
       navigate('/login');
       return;
     }
-
-    axios.get(`${API_URL}/api/empresas/all`, {
+    axios.get(`https://enterprise-backend-production.up.railway.app/api/empresas/all`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
